@@ -1,0 +1,22 @@
+Creating Grader Model with configuration:
+----------------------------------------------------------
+BN: False
+L1: False
+L2: 4e-07
+activation_fn: <function relu at 0x1045b5ed8>
+initializer: <function xavier_initializer at 0x1195c4230>
+model_type: dnn_grader
+n_L1: 113
+n_hid: 196
+n_in: 32638
+n_layers: 2
+n_not_tied: 0
+n_out: 32638
+n_z: 10
+output_fn: <function relu at 0x1045b5ed8>
+----------------------------------------------------------
+Learning Rate: 0.001000
+Learning Rate Decay: 0.940000
+Batch Size: 10
+Optimizer: <class 'tensorflow.python.training.adam.AdamOptimizer'>
+
