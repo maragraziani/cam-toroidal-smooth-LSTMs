@@ -100,7 +100,7 @@ class RNNLM(BaseModel):
       self.word_embeddings = embedding
       inputs = tf.nn.embedding_lookup(embedding, input, name='embedded_data')
 
-    with tf.variable_scope('RNN', initializer=initializer(self._seed)) as scope:
+    with tf.variable_scope('RNN', initializer=initializer(self._seed), regularizer=tf.contrib.layers.l2_regularizer(WD)) as scope:
       # cell contains the LSTM cell.
       # the number of units is specified in the config file: n_hid (e.g. 180)
       # The ACTIVATION function is a hiperbolic tangent tanh.
@@ -125,12 +125,12 @@ class RNNLM(BaseModel):
                                          parallel_iterations=32)
 
     with tf.variable_scope('softmax_output') as scope:
-
+      # Adds L2 regularisation to the softmax output
       weights = self._variable_with_weight_decay(name = "weights",
                                                  shape = [self.network_architecture['n_hid'],
                                                         self.network_architecture['n_out']],
                                                  seed = self._seed,
-                                                 wd = 0.0)
+                                                 wd = WD)
 
       biases  = self._variable_on_gpu('biases', [self.network_architecture['n_out']], tf.constant_initializer(0.1))
 
@@ -215,7 +215,7 @@ class RNNLM(BaseModel):
       return cost
 
 
-  def fit(self, valid_data_list, trn_data_list, learning_rate=1e-2, lr_decay=0.8, batch_size=50, dropout=1.0, optimizer=tf.train.AdamOptimizer, n_epochs=30):
+  def fit(self, valid_data_list, trn_data_list, learning_rate=1e-2, lr_decay=0.8, batch_size=50, dropout=1.0, optimizer=tf.train.AdamOptimizer, n_epochs=30, stimulated=0):
     ''''
         FIT: Performs the NN training
 
@@ -297,12 +297,12 @@ class RNNLM(BaseModel):
         f.write(format_str % (learning_rate, lr_decay, batch_size,  str(optimizer))+'\n\n')
 
       #format_str = ('Epoch %d, Train Loss = %.2f, Valid Loss = %.2f, (%.1f examples/sec; %.3f ' 'sec/epoch')
-      format_str = ('Epoch \t%d Train Entropy: \t%.2f  Valid Entropy: %.2f  PPL: \t %.2f \t (%.1f examples/sec; %.3f ' 'sec/epoch')
+      format_str = ('Epoch \t%d Alpha: %f Train Entropy: \t%.2f  Valid Entropy: %.2f  PPL: \t %.2f \t (%.1f examples/sec; %.3f ' 'sec/epoch')
       #format_str = ('Epoch \t %d \t Train Entropy: \t %.2f  \t Valid Entropy: \t %.2f  \t (%.1f examples/sec; %.3f ' 'sec/epoch')
 
       start_time = time.time()
       old_eval_loss = 1000000.0
-      decay = False
+      decay = True
       for epoch in xrange(1, n_epochs+1):
         loss = 0.0
         batch_time = time.time()
@@ -350,20 +350,20 @@ class RNNLM(BaseModel):
           eval_loss += self.sess.run(evl_cost, feed_dict={self.y : valid_data_list[0][i*batch_size:(i+1)*batch_size], self.x : valid_data_list[1][i*batch_size:(i+1)*batch_size], self.seqlens : valid_data_list[2][i*batch_size:(i+1)*batch_size], self.batch_size : batch_size})
 
 
-        # STOP
+        if stimulated:
 
-        #reshaped_activations = _node_organisation(activations)
-        #import pdb; pdb.set_trace()
-        #print '[A. Node Organisation] Activations reorganised in a {0} x {1} grid'.format(14,14)
+            reshaped_activations = _node_organisation(activations)
+            #import pdb; pdb.set_trace()
+            print '[A. Node Organisation] Activations reorganised in a {0} x {1} grid'.format(14,14)
 
-        #reshaped_activation = reshaped_activations[0][0][0]
+            reshaped_activation = reshaped_activations[0][0][0]
 
-        #activation_grid = self.sess.run(reshaped_activation)
+            activation_grid = self.sess.run(reshaped_activation)
 
-        #transformed_activations = _activation_transformation(reshaped_activations[0])
+            transformed_activations = _activation_transformation(reshaped_activations[0])
 
-        #print '[B. Activation Transformation] Activations transformed with a high pass filter.'
-        
+            print '[B. Activation Transformation] Activations transformed with a high pass filter.'
+
         eval_loss /= np.sum(valid_data_list[2])
 
         if (eval_loss >= old_eval_loss) or decay == True:
@@ -375,11 +375,12 @@ class RNNLM(BaseModel):
 
 
         with open(os.path.join(self._dir, 'LOG.txt'), 'a') as f:
-          f.write(format_str % (epoch, loss, eval_loss, np.exp(eval_loss), examples_per_sec, sec_per_epoch)+'\n')
+          f.write(format_str % (epoch, learning_rate, loss, eval_loss, np.exp(eval_loss), examples_per_sec, sec_per_epoch)+'\n')
 
-        np.save('activation', activation_grid)
+        if stimulated:
+            np.save('activation', activation_grid)
 
-        print (format_str % (epoch, loss, eval_loss, np.exp(eval_loss),  examples_per_sec, sec_per_epoch))
+        print (format_str % (epoch, learning_rate, loss, eval_loss, np.exp(eval_loss),  examples_per_sec, sec_per_epoch))
         self.save()
 
       duration = time.time() - start_time

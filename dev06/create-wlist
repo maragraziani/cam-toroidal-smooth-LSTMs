@@ -1,0 +1,2 @@
+sed "s/\s/\n/g" ptb.train.dat | sort | uniq > temp.input.wlist
+| wc -l 

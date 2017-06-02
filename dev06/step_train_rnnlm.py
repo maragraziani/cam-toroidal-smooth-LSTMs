@@ -39,8 +39,8 @@ def main(argv=None):
   warnings.filterwarnings('ignore')
   args = commandLineParser.parse_args()
 
-  train_file='fin.train.dat'
-  valid_file='fin.dev.dat'
+  train_file='dev.train.dat'
+  valid_file='dev.val.dat'
 
   train_data = process_data_lm(train_file, 'data', spId=False, input_index='input.wlist.index', output_index='input.wlist.index', bptt=20)
   valid_data = process_data_lm(valid_file, path="data", spId=False, input_index='input.wlist.index', output_index='input.wlist.index', bptt=None)
@@ -75,7 +75,8 @@ def main(argv=None):
             batch_size=10,
             dropout=args.dropout,
             optimizer=tf.train.AdamOptimizer,
-            n_epochs=10)
+            n_epochs=10,
+            stimulated=0)
   sys.exit()
   rnnlm.save()
 

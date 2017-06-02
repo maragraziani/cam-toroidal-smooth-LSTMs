@@ -3,8 +3,8 @@ Creating Grader Model with configuration:
 BN: False
 L1: False
 L2: 4e-07
-activation_fn: <function relu at 0x1045b5ed8>
-initializer: <function xavier_initializer at 0x1195c4230>
+activation_fn: <function relu at 0x10aa35ed8>
+initializer: <function xavier_initializer at 0x119edd230>
 model_type: dnn_grader
 n_L1: 113
 n_hid: 196
@@ -13,10 +13,23 @@ n_layers: 2
 n_not_tied: 0
 n_out: 32638
 n_z: 10
-output_fn: <function relu at 0x1045b5ed8>
+output_fn: <function relu at 0x10aa35ed8>
 ----------------------------------------------------------
 Learning Rate: 0.001000
 Learning Rate Decay: 0.940000
 Batch Size: 10
 Optimizer: <class 'tensorflow.python.training.adam.AdamOptimizer'>
 
+Epoch 	1 Alpha: 0.001000 Train Entropy: 	10.39  Valid Entropy: 3.11  PPL: 	 22.31 	 (3.2 examples/sec; 3.104 sec/epoch
+Epoch 	2 Alpha: 0.001000 Train Entropy: 	10.37  Valid Entropy: 3.10  PPL: 	 22.19 	 (3.3 examples/sec; 3.037 sec/epoch
+Epoch 	3 Alpha: 0.001000 Train Entropy: 	10.33  Valid Entropy: 3.09  PPL: 	 21.99 	 (3.3 examples/sec; 3.050 sec/epoch
+Epoch 	4 Alpha: 0.001000 Train Entropy: 	10.27  Valid Entropy: 3.08  PPL: 	 21.79 	 (3.3 examples/sec; 3.025 sec/epoch
+Epoch 	5 Alpha: 0.001000 Train Entropy: 	10.22  Valid Entropy: 3.07  PPL: 	 21.64 	 (3.3 examples/sec; 3.041 sec/epoch
+Epoch 	6 Alpha: 0.001000 Train Entropy: 	10.20  Valid Entropy: 3.07  PPL: 	 21.56 	 (3.3 examples/sec; 3.057 sec/epoch
+Epoch 	7 Alpha: 0.001000 Train Entropy: 	10.18  Valid Entropy: 3.07  PPL: 	 21.52 	 (3.3 examples/sec; 3.063 sec/epoch
+Epoch 	8 Alpha: 0.001000 Train Entropy: 	10.13  Valid Entropy: 3.07  PPL: 	 21.49 	 (3.3 examples/sec; 3.052 sec/epoch
+Epoch 	9 Alpha: 0.001000 Train Entropy: 	10.16  Valid Entropy: 3.07  PPL: 	 21.48 	 (3.3 examples/sec; 3.014 sec/epoch
+Epoch 	10 Alpha: 0.001000 Train Entropy: 	10.15  Valid Entropy: 3.07  PPL: 	 21.47 	 (3.3 examples/sec; 3.037 sec/epoch
+
+Training took 43.026 sec
+----------------------------------------------------------
