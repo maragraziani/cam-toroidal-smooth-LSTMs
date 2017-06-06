@@ -6,6 +6,9 @@ import sys
 import os
 import time
 
+import matplotlib
+matplotlib.use('Agg')
+
 from matplotlib import pyplot as plt
 from matplotlib import cm
 from math import ceil
@@ -408,7 +411,7 @@ class RNNLM(BaseModel):
 
 '''############################################STIMULATED LEARNING#############################################################'''
 
-def _node_organisation(activations, batch_size=10, bptt=20, shape=14, save_folder='raw_activations'):
+def _node_organisation(activations, batch_size=64, bptt=20, shape=14, save_folder='raw_activations'):
   '''
   A) NODE ORGANISATION: Reshapes the network activations into a 2D grid
 
@@ -442,7 +445,7 @@ def _node_organisation(activations, batch_size=10, bptt=20, shape=14, save_folde
   reshaped_activations.append(reshaped_activations_in_sentence)
   return reshaped_activations
 
-def _activation_transformation(reshaped_activations, transformation = 'high_pass', batch_size=10, bptt=20, imshape=14, save_folder='hp_activations'):
+def _activation_transformation(reshaped_activations, transformation = 'high_pass', batch_size=64, bptt=20, imshape=14, save_folder='hp_activations'):
     '''
     B) ACTIVATION TRANSFORMATION: Applies a transformation to the activation patterns
         E.g.
@@ -493,7 +496,7 @@ def _activation_target(imsize=14):
 
     return target
 
-def _regularisation(transformed_activations, target, type=1, batch_size=10, bppt=20 ):
+def _regularisation(transformed_activations, target, type=1, batch_size=64, bppt=20 ):
     '''
         D) REGULARISATION: we compute the distance between the reshaped_activations
             and the targets with the Frobenius norm and add it to the collection of
@@ -506,13 +509,14 @@ def _regularisation(transformed_activations, target, type=1, batch_size=10, bppt
             output: ?
     '''
     # 1.
+    weight=0
     for sentence in range(batch_size):
         for word in range(bppt):
             distance=tf.subtract(transformed_activations[sentence][word],target, name='distance')
 
-            regularizer=tf.norm(distance)
+            regularizer=tf.add(regulariser, tf.norm(distance))
 
-            tf.add_to_collection('losses', regularizer)
+    tf.add_to_collection('losses', regularizer)
     return
 '''#####################################################END######################################################################'''
 
