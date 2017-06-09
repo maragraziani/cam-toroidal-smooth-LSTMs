@@ -1,0 +1,24 @@
+Creating Grader Model with configuration:
+----------------------------------------------------------
+BN: False
+L1: False
+L2: 1e-06
+activation_fn: <function tanh at 0x10436e8c0>
+initializer: <function xavier_initializer at 0x119594578>
+model_type: dnn_grader
+n_L1: 113
+n_hid: 196
+n_in: 32638
+n_layers: 2
+n_not_tied: 0
+n_out: 32638
+n_z: 10
+output_fn: <function relu at 0x10457bed8>
+----------------------------------------------------------
+Stimulated Framework: TrueLearning Rate: 0.010000
+Learning Rate Decay: 0.940000
+Batch Size: 10
+Optimizer: <class 'tensorflow.python.training.adam.AdamOptimizer'>
+
+Epoch 	1 Alpha: 0.010000 Train Entropy: 	9.49  Valid Entropy: 0.00  PPL: 	 1.00 	 (1.7 examples/sec; 6.000 sec/epoch
+Epoch 	2 Alpha: 0.010000 Train Entropy: 	6.03  Valid Entropy: 0.00  PPL: 	 1.00 	 (1.7 examples/sec; 5.848 sec/epoch

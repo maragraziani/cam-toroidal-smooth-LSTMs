@@ -1,0 +1,17 @@
+Creating Grader Model with configuration:
+----------------------------------------------------------
+BN: False
+L1: False
+L2: 1e-06
+activation_fn: <function tanh at 0x10a8328c0>
+initializer: <function xavier_initializer at 0x11949f500>
+model_type: dnn_grader
+n_L1: 113
+n_hid: 196
+n_in: 32638
+n_layers: 2
+n_not_tied: 0
+n_out: 32638
+n_z: 10
+output_fn: <function relu at 0x10ab75ed8>
+----------------------------------------------------------
