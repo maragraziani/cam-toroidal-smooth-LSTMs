@@ -1,0 +1,14 @@
+ADDING WERs. 
+
+This is how it is gonna happen: 
+
+1. Creating a file .nbest with
+
+WORDCODE PROBABILITY
+
+2. Loading the file with the acoustic probabilities
+
+3. Loading the previous .nbest and creating a new file
+   .mlf structured as follows: 
+
+WORD RESCORED_PROBABILITY 
