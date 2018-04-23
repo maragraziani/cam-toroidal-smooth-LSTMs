@@ -11,13 +11,13 @@ The preliminary results of this work show that spatial smoothness improves gener
 ##### Visualisation of the toroidal activations
 
 <p align="center">
-    <img src="figures/activations.png" width=400px>
+    <img src="figures/activations.png" width=600px>
 </p>
 
 ##### Improvements of generalisation performances for really large networks
 
 <p align="center">
-    <img src="figures/generalisation.png" width=400px>
+    <img src="figures/generalisation.png" width=600px>
 </p>
 
 
