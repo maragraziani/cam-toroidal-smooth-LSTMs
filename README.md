@@ -6,7 +6,11 @@ The output activations of the LSTM cells are reorganised into a 2D flat grid, wh
 
 The preliminary results of this work show that spatial smoothness improves generalisation.
 
-Further readings:
 
-Wu, Chunyang, et al. Stimulated deep neural network for speech recognition. University of Cambridge Cambridge, 2016.
- <https://http://www.mlsalt.eng.cam.ac.uk/foswiki/pub/Main/ClassOf2017/Graziani_dissertation.pdf>`__ 
+Related Work: 
+
+Wu, Chunyang, et al. Stimulated deep neural network for speech recognition. University of Cambridge Cambridge, 2016.  <http://mi.eng.cam.ac.uk/~mjfg/interspeech16_stimu.pdf>
+ 
+ MPhil thesis pdf: 
+ 
+ <https://http://www.mlsalt.eng.cam.ac.uk/foswiki/pub/Main/ClassOf2017/Graziani_dissertation.pdf>
