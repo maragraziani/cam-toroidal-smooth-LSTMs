@@ -15,4 +15,4 @@ Ragni, A., et al. "Stimulated training for automatic speech recognition and keyw
  
  MPhil thesis: 
 
-Improved Interpretability and Generalization for Deep Learning <https://http://www.mlsalt.eng.cam.ac.uk/foswiki/pub/Main/ClassOf2017/Graziani_dissertation.pdf>
+Improved Interpretability and Generalization for Deep Learning (<http://www.mlsalt.eng.cam.ac.uk/foswiki/pub/Main/ClassOf2017/Graziani_dissertation.pdf>)
